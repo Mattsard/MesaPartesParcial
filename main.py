@@ -85,15 +85,32 @@ def buscar_expediente():
     if not encontrado:
         print(f"No se encontró ningún expediente con el código '{codigo_buscar}'.")
 
+def ordenar_burbuja():
+    print("\n--- 4. ORDENAR EXPEDIENTES POR CÓDIGO (MÉTODO BURBUJA) ---")
+    if not expedientes:
+        print("No hay expedientes para ordenar.")
+        return
+        
+    n = len(expedientes)
+    # Algoritmo de burbuja clásico sin usar funciones automáticas de ordenamiento
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if expedientes[j]["codigo"] > expedientes[j + 1]["codigo"]:
+                expedientes[j], expedientes[j + 1] = expedientes[j + 1], expedientes[j]
+                
+    print("¡Expedientes ordenados alfabéticamente por código con éxito!")
+    listar_expedientes()
+
 def menu():
     while True:
         print("\n=================================")
-        print("   SISTEMA MESA DE PARTES - EP   ")
+        print("   SISTEMA MESA DE PARTES   ")
         print("=================================")
         print("1. Registrar expediente")
         print("2. Listar expedientes")
         print("3. Buscar expediente por código")
-        print("4. Salir")
+        print("4. Ordenar expedientes (Burbuja)")
+        print("5. Salir")
         
         opcion = input("Seleccione una opción: ").strip()
         if opcion == "1":
@@ -103,7 +120,9 @@ def menu():
         elif opcion == "3":
             buscar_expediente()
         elif opcion == "4":
-            print("Saling...")
+            ordenar_burbuja()
+        elif opcion == "5":
+            print("Saliendo del programa...")
             break
         else:
             print("Opción inválida. Intente de nuevo.")
