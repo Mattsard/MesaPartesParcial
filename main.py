@@ -2,7 +2,6 @@ expedientes = []
 
 def registrar_expediente():
     print("\n--- 1. REGISTRAR NUEVO EXPEDIENTE ---")
-    
     codigo = input("Ingrese el código único: ").strip()
     if not codigo:
         print("Error: El código no puede estar vacío.")
@@ -48,23 +47,63 @@ def registrar_expediente():
     })
     print("¡Expediente registrado con éxito!")
 
+def listar_expedientes():
+    print("\n--- 2. LISTADO DE EXPEDIENTES ---")
+    if not expedientes:
+        print("No hay expedientes registrados en el sistema.")
+        return
+        
+    for i, exp in enumerate(expedientes, 1):
+        print(f"\nExpediente #{i}")
+        print(f"  Código: {exp['codigo']}")
+        print(f"  Solicitante: {exp['solicitante']}")
+        print(f"  Tipo Documento: {exp['tipo_documento']}")
+        print(f"  Asunto: {exp['asunto']}")
+        print(f"  Fecha: {exp['fecha']}")
+        print(f"  Estado: {exp['estado']}")
+
+def buscar_expediente():
+    print("\n--- 3. BUSCAR EXPEDIENTE POR CÓDIGO ---")
+    if not expedientes:
+        print("No hay expedientes registrados.")
+        return
+        
+    codigo_buscar = input("Ingrese el código del expediente a buscar: ").strip()
+    encontrado = False
+    for exp in expedientes:
+        if exp["codigo"] == codigo_buscar:
+            print("\n¡Expediente Encontrado!")
+            print(f"  Código: {exp['codigo']}")
+            print(f"  Solicitante: {exp['solicitante']}")
+            print(f"  Tipo Documento: {exp['tipo_documento']}")
+            print(f"  Asunto: {exp['asunto']}")
+            print(f"  Fecha: {exp['fecha']}")
+            print(f"  Estado: {exp['estado']}")
+            encontrado = True
+            break
+            
+    if not encontrado:
+        print(f"No se encontró ningún expediente con el código '{codigo_buscar}'.")
+
 def menu():
     while True:
         print("\n=================================")
-        print("   SISTEMA MESA DE PARTES   ")
+        print("   SISTEMA MESA DE PARTES - EP   ")
         print("=================================")
         print("1. Registrar expediente")
-        print("2. Ver expedientes en memoria (Prueba)")
-        print("3. Salir")
+        print("2. Listar expedientes")
+        print("3. Buscar expediente por código")
+        print("4. Salir")
         
         opcion = input("Seleccione una opción: ").strip()
-        
         if opcion == "1":
             registrar_expediente()
         elif opcion == "2":
-            print("\nExpedientes en memoria:", expedientes)
+            listar_expedientes()
         elif opcion == "3":
-            print("Saliendo del programa...")
+            buscar_expediente()
+        elif opcion == "4":
+            print("Saling...")
             break
         else:
             print("Opción inválida. Intente de nuevo.")
